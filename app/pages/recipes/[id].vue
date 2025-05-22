@@ -5,7 +5,7 @@ import { type Recipe } from '~~/types/types';
 const route = useRoute();
 const id = route.params.id as string;
 
-const { data: recipe, error } = await useFetch<Recipe>(`https://myfood-api.onrender.com/api/recipes/id/${id}`);
+const { data: recipe, error } = await useFetch<Recipe>(`https://myfood-api-production.up.railway.app/api/recipes/id/${id}`);
 
 useSeoMeta({
   title: recipe?.value?.name || 'Recipe Details',

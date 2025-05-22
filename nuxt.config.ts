@@ -25,9 +25,6 @@ export default defineNuxtConfig({
   features: {
     inlineStyles: true
   },
-  image: {
-    domains: ['https://myfood-api.onrender.com/']
-  },
   unhead: {
     renderSSRHeadOptions: {
       omitLineBreaks: false

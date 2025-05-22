@@ -2,7 +2,7 @@
 import { type Recipe } from '~~/types/types';
 import RecipeCard from '~/components/RecipeCard.vue';
 
-const {data, error} = await useFetch<Recipe[]>('https://myfood-api.onrender.com/api/recipes');
+const {data, error} = await useFetch<Recipe[]>('https://myfood-api-production.up.railway.app/api/recipes');
 
 useSeoMeta({
   title: "SajianMalaya",
