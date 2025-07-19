@@ -27,7 +27,7 @@ useSeoMeta({
     <div v-else-if="!recipe" class="text-center">Loading...</div>
     <div v-else class="max-w-4xl mx-auto">
       <h1 class="text-4xl font-bold mb-4">{{ recipe.name || 'No Name' }}</h1>
-      <NuxtImg :src="recipe.image || ''" alt="" class="rounded-lg mb-6" />
+      <NuxtImg :src="`https://makanan-api.netlify.app/.netlify/functions/api/recipes/${recipe.id}/image`" alt="" class="rounded-lg mb-6" />
       <div class="mb-4">
         <strong>Cook Time:</strong> {{ recipe.cookTimeMinutes ?? 'N/A' }} minutes
       </div>

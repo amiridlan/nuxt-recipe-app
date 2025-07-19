@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
     <div class="flex flex-col shadow rounded-md">
-            <NuxtImg :src="recipe.image || ''" sizes="xs:100vw sm:50vw lg:400px" format="avif" densities="x1" alt="" class="rounded-t-md" />
+            <NuxtImg :src="`https://makanan-api.netlify.app/.netlify/functions/api/recipes/${recipe.id}/image`" sizes="xs:100vw sm:50vw lg:400px" format="jpg" densities="x1" alt="" class="rounded-t-md" />
             <div class="flex flex-col py-6 px-4 flex-1">
                 <p class="text-xl lg:text-2xl font-semibold mb-2">{{ recipe.name || 'No Name' }}</p>
                 <div class="font-normal w-full bg-white/80 flex gap-8 text-lg lg:text-xl mb-4 mt-auto">
