@@ -2,7 +2,7 @@
 import { type Recipe } from '~~/types/types';
 import RecipeCard from '~/components/RecipeCard.vue';
 
-const {data, error} = await useFetch<Recipe[]>('https://makanan-api.netlify.app/.netlify/functions/api/recipes');
+const {data, error} = await useFetch<Recipe[]>('https://v2-makanan-api.netlify.app/recipes');
 
 useSeoMeta({
   title: "SajianMalaya",

@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-09',
   future: {
@@ -42,5 +41,10 @@ export default defineNuxtConfig({
     families: {
       Montserrat: true,
     }
+  },
+
+  image: {
+    domains: ['v2-makanan-api.netlify.app'],
+    ipx: {}
   }
 })

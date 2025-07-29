@@ -5,18 +5,18 @@ import { type Recipe } from '~~/types/types';
 const route = useRoute();
 const id = route.params.id as string;
 
-const { data: recipe, error } = await useFetch<Recipe>(`https://makanan-api.netlify.app/.netlify/functions/api/recipes/${id}`);
+const { data: recipe, error } = await useFetch<Recipe>(`https://v2-makanan-api.netlify.app/recipes/${id}`);
 
 useSeoMeta({
   title: recipe?.value?.name || 'Recipe Details',
   description: '',
   ogTitle: recipe?.value?.name || 'Recipe Details',
   ogDescription: '',
-  ogImage: recipe?.value?.image || '/nuxt-course-hero.png',
+  ogImage: recipe?.value?.image ? `https://v2-makanan-api.netlify.app${recipe.value.image}` : '/nuxt-course-hero.png',
   ogUrl: `https://nuxtrecipes.netlify.app/recipes/${id}`,
   twitterTitle: recipe?.value?.name || 'Recipe Details',
   twitterDescription: '',
-  twitterImage: recipe?.value?.image || '/nuxt-course-hero.png',
+  twitterImage: recipe?.value?.image ? `https://v2-makanan-api.netlify.app${recipe.value.image}` : '/nuxt-course-hero.png',
   twitterCard: "summary",
 });
 </script>
@@ -27,9 +27,12 @@ useSeoMeta({
     <div v-else-if="!recipe" class="text-center">Loading...</div>
     <div v-else class="max-w-4xl mx-auto">
       <h1 class="text-4xl font-bold mb-4">{{ recipe.name || 'No Name' }}</h1>
-      <NuxtImg :src="`https://makanan-api.netlify.app/.netlify/functions/api/recipes/${recipe.id}/image`" alt="" class="rounded-lg mb-6" />
+      <NuxtImg :src="`https://v2-makanan-api.netlify.app${recipe.image}`" alt="food image" class="rounded-lg mb-6" />
       <div class="mb-4">
-        <strong>Cook Time:</strong> {{ recipe.cookTimeMinutes ?? 'N/A' }} minutes
+        <strong>Preparation Time:</strong> {{ recipe.preparationTime ?? 'N/A' }} minutes
+      </div>
+      <div class="mb-4">
+        <strong>Cook Time:</strong> {{ recipe.cookingTime ?? 'N/A' }} minutes
       </div>
       <div class="mb-4">
         <strong>Calories per Serving:</strong> {{ recipe.caloriesPerServing ?? 'N/A' }}
