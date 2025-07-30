@@ -14,11 +14,11 @@ defineProps<{
                 <div class="font-normal w-full bg-white/80 flex gap-8 text-lg lg:text-xl mb-4 mt-auto">
                 <div class="flex items-center gap-1">
                     <Icon name="mdi:clock-time-eight-outline" style="color: #f79f1a" />
-                    <span>{{ recipe.cookingTime ?? 'N/A' }} minutes</span>
+                    <span>{{ ((+recipe.cookingTimeMinutes || 0) + (+recipe.preparationTimeMinutes || 0)) || 'N/A' }} minit</span>
                 </div>
                 <div class="flex items-center gap-1">
                     <Icon name="mdi:fire" style="color: #f79f1a" />
-                    <span>{{ recipe.caloriesPerServing ?? 'N/A' }} calories per serving</span>
+                    <span>{{ recipe.caloriesPerServing ?? 'N/A' }} kalori setiap hidangan</span>
                 </div>
                 </div>
                 <NuxtLink

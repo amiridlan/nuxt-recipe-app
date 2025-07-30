@@ -13,8 +13,8 @@ export interface Recipe {
     ingredients:        string[];
     instructions:       string[];
     steps:              string[];
-    preparationTime:    number;
-    cookingTime:        number;
+    preparationTimeMinutes:    number;
+    cookingTimeMinutes:        number;
     servings:           number;
     difficulty:         string;
     cuisine:            string;

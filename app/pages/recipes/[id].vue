@@ -29,10 +29,10 @@ useSeoMeta({
       <h1 class="text-4xl font-bold mb-4">{{ recipe.name || 'No Name' }}</h1>
       <NuxtImg :src="`https://v2-makanan-api.netlify.app${recipe.image}`" alt="food image" class="rounded-lg mb-6" />
       <div class="mb-4">
-        <strong>Preparation Time:</strong> {{ recipe.preparationTime ?? 'N/A' }} minutes
+        <strong>Preparation Time:</strong> {{ recipe.preparationTimeMinutes ?? 'N/A' }} minutes
       </div>
       <div class="mb-4">
-        <strong>Cook Time:</strong> {{ recipe.cookingTime ?? 'N/A' }} minutes
+        <strong>Cook Time:</strong> {{ recipe.cookingTimeMinutes ?? 'N/A' }} minutes
       </div>
       <div class="mb-4">
         <strong>Calories per Serving:</strong> {{ recipe.caloriesPerServing ?? 'N/A' }}
