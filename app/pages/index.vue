@@ -2,7 +2,10 @@
 import { type Recipe } from '~~/types/types';
 import RecipeCard from '~/components/RecipeCard.vue';
 
-const {data, error} = await useFetch<Recipe[]>('https://v2-makanan-api.netlify.app/recipes');
+const { fetchRecipes } = useRecipes();
+
+// Fetch recipes from Supabase
+const { data, error } = await useAsyncData<Recipe[]>('recipes', () => fetchRecipes());
 
 useSeoMeta({
   title: "SajianMalaya",
@@ -43,7 +46,6 @@ useSeoMeta({
 
         <section class="py-20 container">
         <h2 class="text-3xl lg:text-5xl mb-2">Resipi Terbaru</h2>
-        <!-- <p class="text-lg lg:text-xl mb-8">Check out our most popular recipes!</p> -->
         <div v-if="!error && data?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8">
             <RecipeCard v-for="recipe in data" :key="recipe.id" :recipe="recipe" />
         </div>

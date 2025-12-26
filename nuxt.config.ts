@@ -44,7 +44,15 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['v2-makanan-api.netlify.app'],
+    domains: ['https://vghtpyughervgulwbkud.supabase.co'],
     ipx: {}
+  },
+
+  // Add runtime config for Supabase
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_ANON_KEY,
+    }
   }
 })

@@ -13,16 +13,18 @@ export interface Recipe {
     ingredients:        string[];
     instructions:       string[];
     steps:              string[];
-    preparationTimeMinutes:    number;
-    cookingTimeMinutes:        number;
+    preparation_time_minutes:    number;  // Updated from camelCase
+    cooking_time_minutes:        number;  // Updated from camelCase
     servings:           number;
     difficulty:         string;
     cuisine:            string;
-    caloriesPerServing: number;
+    calories_per_serving: number;  // Updated from camelCase
     tags:               string[];
-    userId:             number;
-    image:              string;
+    user_id:            number;  // Updated from camelCase
+    image_url:          string;  // Updated: now comes from Supabase
     rating:             number;
-    reviewCount:        number;
-    mealType:           string[];
+    review_count:       number;  // Updated from camelCase
+    meal_type:          string[];  // Updated from camelCase
+    created_at?:        string;
+    updated_at?:        string;
 }

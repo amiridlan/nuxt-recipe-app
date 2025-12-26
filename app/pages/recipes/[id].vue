@@ -5,18 +5,24 @@ import { type Recipe } from '~~/types/types';
 const route = useRoute();
 const id = route.params.id as string;
 
-const { data: recipe, error } = await useFetch<Recipe>(`https://v2-makanan-api.netlify.app/recipes/${id}`);
+const { fetchRecipeById } = useRecipes();
+
+// Fetch recipe from Supabase
+const { data: recipe, error } = await useAsyncData<Recipe>(
+  `recipe-${id}`,
+  () => fetchRecipeById(id)
+);
 
 useSeoMeta({
   title: recipe?.value?.name || 'Recipe Details',
-  description: '',
+  description: recipe?.value?.description || '',
   ogTitle: recipe?.value?.name || 'Recipe Details',
-  ogDescription: '',
-  ogImage: recipe?.value?.image ? `https://v2-makanan-api.netlify.app${recipe.value.image}` : '/nuxt-course-hero.png',
+  ogDescription: recipe?.value?.description || '',
+  ogImage: recipe?.value?.image_url || '/nuxt-course-hero.png',
   ogUrl: `https://nuxtrecipes.netlify.app/recipes/${id}`,
   twitterTitle: recipe?.value?.name || 'Recipe Details',
-  twitterDescription: '',
-  twitterImage: recipe?.value?.image ? `https://v2-makanan-api.netlify.app${recipe.value.image}` : '/nuxt-course-hero.png',
+  twitterDescription: recipe?.value?.description || '',
+  twitterImage: recipe?.value?.image_url || '/nuxt-course-hero.png',
   twitterCard: "summary",
 });
 </script>
@@ -27,15 +33,20 @@ useSeoMeta({
     <div v-else-if="!recipe" class="text-center">Loading...</div>
     <div v-else class="max-w-4xl mx-auto">
       <h1 class="text-4xl font-bold mb-4">{{ recipe.name || 'No Name' }}</h1>
-      <NuxtImg :src="`https://v2-makanan-api.netlify.app${recipe.image}`" alt="food image" class="rounded-lg mb-6" />
+      <!-- Updated: Use image_url from Supabase -->
+      <NuxtImg 
+        :src="recipe.image_url" 
+        alt="food image" 
+        class="rounded-lg mb-6 w-full" 
+      />
       <div class="mb-4">
-        <strong>Preparation Time:</strong> {{ recipe.preparationTimeMinutes ?? 'N/A' }} minutes
+        <strong>Preparation Time:</strong> {{ recipe.preparation_time_minutes ?? 'N/A' }} minutes
       </div>
       <div class="mb-4">
-        <strong>Cook Time:</strong> {{ recipe.cookingTimeMinutes ?? 'N/A' }} minutes
+        <strong>Cook Time:</strong> {{ recipe.cooking_time_minutes ?? 'N/A' }} minutes
       </div>
       <div class="mb-4">
-        <strong>Calories per Serving:</strong> {{ recipe.caloriesPerServing ?? 'N/A' }}
+        <strong>Calories per Serving:</strong> {{ recipe.calories_per_serving ?? 'N/A' }}
       </div>
       <div class="mb-4">
         <strong>Ingredients:</strong>
