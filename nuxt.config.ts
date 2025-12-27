@@ -56,5 +56,12 @@ export default defineNuxtConfig({
     }
   },
 
-  
+  ui: {
+    global: true
+  },
+  colorMode: {
+    preference: 'light',
+    fallback: 'light',
+    classSuffix: ''
+  }
 })
