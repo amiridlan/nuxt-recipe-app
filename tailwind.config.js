@@ -4,6 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
+
+        // 60-30-10 Color Palette
+        "primary-dark": "#1B211A",      // 60% - Main background
+        "primary-green": "#8BAE66",     // 30% - Primary actions
+        "accent-cream": "#EBD5AB",      // 10% - Accents
+        
         "dodgeroll-gold": {
           50: "#fff9eb",
           100: "#fdecc8",

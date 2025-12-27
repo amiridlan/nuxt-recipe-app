@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   modules: [
-    '@nuxtjs/tailwindcss',
+    '@nuxt/ui',
     '@nuxtjs/google-fonts',
     '@nuxt/icon',
     '@nuxt/image'
@@ -54,5 +54,7 @@ export default defineNuxtConfig({
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_ANON_KEY,
     }
-  }
+  },
+
+  
 })
