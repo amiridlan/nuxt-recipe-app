@@ -37,6 +37,11 @@ export default defineNuxtConfig({
     '@nuxt/image'
   ],
   
+  ui: {
+    theme: {
+      dark: false
+    }
+  },
 
   googleFonts: {
     families: {
