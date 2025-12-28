@@ -23,6 +23,7 @@ export default defineAppConfig({
   nuxtIcon: {},
   colorMode: {
     preference: 'light',
-    fallback: 'light'
+    fallback: 'light',
+    componentName: 'ColorScheme'
   }
 })

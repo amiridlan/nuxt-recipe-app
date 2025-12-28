@@ -30,18 +30,14 @@ export default defineNuxtConfig({
     }
   },
   devtools: { enabled: true },
+  
   modules: [
     '@nuxt/ui',
-    '@nuxtjs/google-fonts',
-    '@nuxt/icon',
-    '@nuxt/image'
+    '@nuxt/image',
+    '@nuxtjs/google-fonts'
   ],
-  
-  ui: {
-    theme: {
-      dark: false
-    }
-  },
+
+  components: true,
 
   googleFonts: {
     families: {
@@ -54,13 +50,10 @@ export default defineNuxtConfig({
     ipx: {}
   },
 
-  // Add runtime config for Supabase
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_ANON_KEY,
     }
-  },
-
-  
+  }
 })

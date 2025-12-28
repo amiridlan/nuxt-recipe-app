@@ -1,0 +1,20 @@
+/* Force light mode - override any dark mode styles */
+html.dark {
+  color-scheme: light !important;
+}
+
+/* Remove all dark mode classes */
+html {
+  color-scheme: light !important;
+}
+
+/* Ensure cards stay white */
+.dark [class*='card'] {
+  background-color: white !important;
+}
+
+/* Override any dark mode background colors */
+.dark {
+  background-color: #1b211a !important;
+  color: white !important;
+}
