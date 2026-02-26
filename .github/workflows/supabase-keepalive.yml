@@ -13,11 +13,18 @@ jobs:
     steps:
       - name: Ping Supabase Database
         run: |
-          # Make a simple REST API call to keep the Supabase project active
-          curl -X GET \
+          # Ping Supabase auth endpoint to keep the project active
+          response=$(curl -X GET \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/" \
-            --fail-with-body
+            "${{ secrets.SUPABASE_URL }}/auth/v1/health" \
+            -w "\n%{http_code}" -s)
 
-          echo "✓ Successfully pinged Supabase at $(date)"
+          http_code=$(echo "$response" | tail -n1)
+
+          if [ "$http_code" -eq 200 ]; then
+            echo "✓ Successfully pinged Supabase at $(date)"
+          else
+            echo "Failed to ping Supabase. HTTP Status: $http_code"
+            echo "Response: $response"
+            exit 1
+          fi
