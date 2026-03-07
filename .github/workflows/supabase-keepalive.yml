@@ -17,7 +17,7 @@ jobs:
           response=$(curl -X GET \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
             -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/?apikey=${{ secrets.SUPABASE_ANON_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/recipes?limit=1" \
             -w "\n%{http_code}" -s)
 
           http_code=$(echo "$response" | tail -n1)
