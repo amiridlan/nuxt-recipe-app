@@ -17,7 +17,7 @@ const technologies = [
         <div class="space-y-12">
           <!-- Title -->
           <h1 class="text-center text-4xl lg:text-6xl font-extrabold text-accent-cream">
-            Tentang SajianMalaya
+            {{ $t('about.title') }}
           </h1>
 
           <!-- Mission Card -->
@@ -25,7 +25,7 @@ const technologies = [
             <div class="space-y-6">
               
               <p class="text-center text-xl text-gray-700 leading-relaxed">
-                SajianMalaya ialah platform resipi digital yang menyenaraikan pelbagai resipi masakan dari Malaysia.
+                {{ $t('about.description') }}
               </p>
               
               <UDivider />
@@ -33,7 +33,7 @@ const technologies = [
               <div class="space-y-4">
                 <div class="flex items-center gap-3">
                   <UIcon name="i-heroicons-code-bracket" class="text-3xl text-primary-green" />
-                  <h3 class="text-2xl font-bold text-primary-dark">Teknologi</h3>
+                  <h3 class="text-2xl font-bold text-primary-dark">{{ $t('about.technology') }}</h3>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div 
@@ -57,10 +57,10 @@ const technologies = [
       <UContainer>
         <div class="text-center space-y-6">
           <h2 class="text-3xl lg:text-5xl font-bold text-accent-cream">
-            Mulakan Pencarian Resipi Anda
+            {{ $t('about.ctaTitle') }}
           </h2>
           <p class="text-xl text-white/90 max-w-2xl mx-auto">
-            Terokai koleksi resipi kami dan mulakan perjalanan masakan anda hari ini!
+            {{ $t('about.ctaDesc') }}
           </p>
           <UButton
             to="/"
@@ -69,7 +69,7 @@ const technologies = [
             trailing
             class="bg-primary-green hover:bg-primary-green/90 text-white"
           >
-            Lihat Semua Resipi
+            {{ $t('about.ctaButton') }}
           </UButton>
         </div>
       </UContainer>

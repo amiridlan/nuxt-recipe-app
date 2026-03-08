@@ -5,6 +5,8 @@ defineProps({
     error: Object as () => NuxtError,
 });
 
+const { t } = useI18n();
+
 const getErrorIcon = (statusCode?: number) => {
   if (statusCode === 404) return 'i-heroicons-magnifying-glass';
   if (statusCode === 500) return 'i-heroicons-exclamation-triangle';
@@ -18,16 +20,16 @@ const getErrorColor = (statusCode?: number) => {
 };
 
 const getErrorTitle = (statusCode?: number) => {
-  if (statusCode === 404) return 'Halaman Tidak Dijumpai';
-  if (statusCode === 500) return 'Ralat Pelayan';
-  return 'Ralat Berlaku';
+  if (statusCode === 404) return t('error.404Title');
+  if (statusCode === 500) return t('error.500Title');
+  return t('error.defaultTitle');
 };
 
 const getErrorDescription = (statusCode?: number, message?: string) => {
   if (message) return message;
-  if (statusCode === 404) return 'Halaman yang anda cari tidak wujud atau telah dipindahkan.';
-  if (statusCode === 500) return 'Terdapat masalah pada pelayan. Sila cuba lagi kemudian.';
-  return 'Sesuatu yang tidak dijangka telah berlaku. Sila cuba lagi.';
+  if (statusCode === 404) return t('error.404Desc');
+  if (statusCode === 500) return t('error.500Desc');
+  return t('error.defaultDesc');
 };
 </script>
 
@@ -78,9 +80,9 @@ const getErrorDescription = (statusCode?: number, message?: string) => {
                 icon="i-heroicons-home"
                 class="bg-primary-green hover:bg-primary-green/90 text-white"
               >
-                Kembali ke Laman Utama
+                {{ $t('error.home') }}
               </UButton>
-              
+
               <UButton
                 color="gray"
                 variant="soft"
@@ -88,14 +90,14 @@ const getErrorDescription = (statusCode?: number, message?: string) => {
                 icon="i-heroicons-arrow-path"
                 @click="$router.go(-1)"
               >
-                Halaman Sebelumnya
+                {{ $t('error.back') }}
               </UButton>
             </div>
 
             <!-- Help Text -->
             <div class="pt-8 border-t border-gray-200">
               <p class="text-sm text-gray-500">
-                Jika masalah berterusan, sila hubungi sokongan kami.
+                {{ $t('error.help') }}
               </p>
             </div>
           </div>

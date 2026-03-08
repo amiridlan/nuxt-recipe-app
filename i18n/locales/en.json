@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us"
+  },
+  "footer": {
+    "tagline": "Digital recipe platform for Malaysia and Southeast Asia.",
+    "links": "Links"
+  },
+  "hero": {
+    "title": "Find Recipes Easily!",
+    "subtitle": "Search by dish name, required ingredients, and cooking time.",
+    "cta": "Find Recipes"
+  },
+  "recipes": {
+    "latest": "Latest Recipes",
+    "explore": "Explore our best recipe collection",
+    "found": "{count} recipes found",
+    "errorTitle": "Error loading data",
+    "errorDesc": "Data could not be displayed. Please try again later.",
+    "noResults": "No recipes found",
+    "noResultsHint": "Try searching with different keywords",
+    "viewRecipe": "View Recipe",
+    "minutes": "min",
+    "calories": "cal"
+  },
+  "search": {
+    "placeholder": "Search recipe name...",
+    "allOrigins": "All Origins",
+    "selectOrigin": "Select Origin",
+    "addIngredient": "Add ingredient (e.g.: chicken, onion, chili)...",
+    "add": "Add",
+    "reset": "Reset",
+    "selectedIngredients": "Selected ingredients:",
+    "searchLabel": "Search:",
+    "originLabel": "Origin:"
+  },
+  "recipe": {
+    "back": "Back to List",
+    "prepTime": "Prep Minutes",
+    "cookTime": "Cook Minutes",
+    "servings": "Servings",
+    "calories": "Calories",
+    "ingredients": "Ingredients",
+    "steps": "Steps",
+    "history": "History",
+    "historyOf": "History of {name}",
+    "noIngredients": "No ingredient information",
+    "noSteps": "No cooking steps information",
+    "noHistory": "No history information for this recipe",
+    "tags": "Tags",
+    "errorTitle": "Error loading recipe",
+    "errorDesc": "Failed to load recipe. Please try again later."
+  },
+  "about": {
+    "title": "About SajianMalaya",
+    "description": "SajianMalaya is a digital recipe platform listing various recipes from Malaysia.",
+    "technology": "Technology",
+    "ctaTitle": "Start Your Recipe Search",
+    "ctaDesc": "Explore our recipe collection and start your culinary journey today!",
+    "ctaButton": "View All Recipes"
+  },
+  "error": {
+    "404Title": "Page Not Found",
+    "500Title": "Server Error",
+    "defaultTitle": "An Error Occurred",
+    "404Desc": "The page you are looking for does not exist or has been moved.",
+    "500Desc": "There is a problem with the server. Please try again later.",
+    "defaultDesc": "Something unexpected happened. Please try again.",
+    "home": "Back to Home",
+    "back": "Previous Page",
+    "help": "If the problem persists, please contact our support."
+  }
+}

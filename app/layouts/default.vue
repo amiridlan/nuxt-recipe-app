@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const currentYear = new Date().getFullYear();
 const { $pageLoading } = useNuxtApp();
+const { t } = useI18n();
 
 const socialLinks = [
   {
@@ -44,13 +45,13 @@ const socialLinks = [
                 <span class="text-2xl font-bold text-accent-cream">SajianMalaya</span>
               </div>
               <p class="text-white/80">
-                Platform resipi digital untuk Malaysia dan rantau Asia Tenggara.
+                {{ $t('footer.tagline') }}
               </p>
             </div>
 
             <!-- Social Links -->
             <div class="space-y-4 text-center md:text-right">
-              <h3 class="text-lg font-semibold text-accent-cream text-center">Pautan</h3>
+              <h3 class="text-lg font-semibold text-accent-cream text-center">{{ $t('footer.links') }}</h3>
               <div class="flex gap-3 justify-center md:justify-end">
                 <UButton
                   v-for="social in socialLinks"

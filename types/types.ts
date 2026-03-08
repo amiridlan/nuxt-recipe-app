@@ -25,6 +25,7 @@ export interface Recipe {
     rating:             number;
     review_count:       number;  // Updated from camelCase
     meal_type:          string[];  // Updated from camelCase
+    history?:           string;
     created_at?:        string;
     updated_at?:        string;
 }

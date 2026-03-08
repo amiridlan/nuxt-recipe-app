@@ -3,7 +3,7 @@ import type { Recipe } from '~~/types/types';
 export const useRecipes = () => {
   const { $supabase } = useNuxtApp();
 
-  // Fetch all recipes
+  // Fetch all recipes (list view — always returns original Malay data)
   const fetchRecipes = async () => {
     const { data, error } = await $supabase
       .from('recipes')
@@ -18,9 +18,9 @@ export const useRecipes = () => {
     return data as Recipe[];
   };
 
-  // Fetch single recipe by ID
-  const fetchRecipeById = async (id: string | number) => {
-    const { data, error } = await $supabase
+  // Fetch single recipe by ID, merged with translation if locale is not 'ms'
+  const fetchRecipeById = async (id: string | number, locale: string = 'ms') => {
+    const { data: base, error } = await $supabase
       .from('recipes')
       .select('*')
       .eq('id', id)
@@ -31,7 +31,28 @@ export const useRecipes = () => {
       throw error;
     }
 
-    return data as Recipe;
+    // Malay is the source language — return base data directly
+    if (locale === 'ms') return base as Recipe;
+
+    // Fetch translation row for the requested locale
+    const { data: trans } = await $supabase
+      .from('recipe_translations')
+      .select('name, description, history, ingredients, steps')
+      .eq('recipe_id', id)
+      .eq('locale', locale)
+      .maybeSingle();
+
+    if (!trans) return base as Recipe;
+
+    // Merge: translation fields override base only when present
+    return {
+      ...base,
+      ...(trans.name        && { name: trans.name }),
+      ...(trans.description && { description: trans.description }),
+      ...(trans.history     && { history: trans.history }),
+      ...(trans.ingredients?.length && { ingredients: trans.ingredients }),
+      ...(trans.steps?.length       && { steps: trans.steps }),
+    } as Recipe;
   };
 
   // Search recipes by name

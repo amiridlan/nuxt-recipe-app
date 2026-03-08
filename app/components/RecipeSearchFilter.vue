@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const { t } = useI18n();
+
 const searchQuery = ref('');
 const selectedOrigin = ref('');
 const selectedIngredients = ref<string[]>([]);
 const ingredientInput = ref('');
 
-const origins = [
-  { label: 'Semua Asal', value: '' },
+const origins = computed(() => [
+  { label: t('search.allOrigins'), value: '' },
   { label: 'Malaysia', value: 'Malaysia' },
   { label: 'Indonesia', value: 'Indonesia' },
   { label: 'Singapore', value: 'Singapore' },
   { label: 'Thailand', value: 'Thailand' },
   { label: 'Vietnam', value: 'Vietnam' }
-];
+]);
 
 const emit = defineEmits<{
   search: [query: string];
@@ -64,7 +66,7 @@ const clearFilters = () => {
             v-model="searchQuery"
             icon="i-heroicons-magnifying-glass"
             size="lg"
-            placeholder="Cari nama resipi..."
+            :placeholder="$t('search.placeholder')"
             @input="handleSearch"
             class="[&>input]:text-primary-dark"
           >
@@ -85,7 +87,7 @@ const clearFilters = () => {
         <USelectMenu
           v-model="selectedOrigin"
           :options="origins"
-          placeholder="Pilih Asal"
+          :placeholder="$t('search.selectOrigin')"
           size="lg"
           class="md:w-64"
           @change="handleFilter"
@@ -104,7 +106,7 @@ const clearFilters = () => {
           icon="i-heroicons-x-circle"
           @click="clearFilters"
         >
-          Reset
+          {{ $t('search.reset') }}
         </UButton>
       </div>
 
@@ -115,7 +117,7 @@ const clearFilters = () => {
             v-model="ingredientInput"
             icon="i-heroicons-beaker"
             size="lg"
-            placeholder="Tambah bahan (contoh: ayam, bawang, cili)..."
+            :placeholder="$t('search.addIngredient')"
             @keyup.enter="addIngredient"
             class="[&>input]:text-primary-dark"
           />
@@ -127,13 +129,13 @@ const clearFilters = () => {
           :disabled="!ingredientInput.trim()"
           class="bg-primary-green hover:bg-primary-green/90 text-white disabled:bg-primary-green disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Tambah
+          {{ $t('search.add') }}
         </UButton>
       </div>
 
       <!-- Selected Ingredients -->
       <div v-if="selectedIngredients.length > 0" class="space-y-2">
-        <p class="text-sm text-gray-600 font-medium">Bahan yang dipilih:</p>
+        <p class="text-sm text-gray-600 font-medium">{{ $t('search.selectedIngredients') }}</p>
         <div class="flex flex-wrap gap-2">
           <UBadge
             v-for="ingredient in selectedIngredients"
@@ -165,7 +167,7 @@ const clearFilters = () => {
           variant="soft"
           size="md"
         >
-          Carian: {{ searchQuery }}
+          {{ $t('search.searchLabel') }} {{ searchQuery }}
           <UButton
             color="primary"
             variant="link"
@@ -181,7 +183,7 @@ const clearFilters = () => {
           variant="soft"
           size="md"
         >
-          Asal: {{ selectedOrigin }}
+          {{ $t('search.originLabel') }} {{ selectedOrigin }}
           <UButton
             color="primary"
             variant="link"

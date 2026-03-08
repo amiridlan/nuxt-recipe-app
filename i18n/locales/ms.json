@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Utama",
+    "about": "Tentang Kami"
+  },
+  "footer": {
+    "tagline": "Platform resipi digital untuk Malaysia dan rantau Asia Tenggara.",
+    "links": "Pautan"
+  },
+  "hero": {
+    "title": "Cari Resipi dengan Mudah!",
+    "subtitle": "Anda boleh buat carian dengan nama sajian, bahan yang diperlukan dan juga masa memasak.",
+    "cta": "Cari Resipi"
+  },
+  "recipes": {
+    "latest": "Resipi Terbaru",
+    "explore": "Terokai koleksi resipi terbaik kami",
+    "found": "{count} resipi ditemui",
+    "errorTitle": "Ralat memuat data",
+    "errorDesc": "Data tidak dapat dipaparkan. Sila cuba lagi kemudian.",
+    "noResults": "Tiada resipi ditemui",
+    "noResultsHint": "Cuba cari dengan kata kunci yang berbeza",
+    "viewRecipe": "Lihat Resipi",
+    "minutes": "minit",
+    "calories": "kalori"
+  },
+  "search": {
+    "placeholder": "Cari nama resipi...",
+    "allOrigins": "Semua Asal",
+    "selectOrigin": "Pilih Asal",
+    "addIngredient": "Tambah bahan (contoh: ayam, bawang, cili)...",
+    "add": "Tambah",
+    "reset": "Reset",
+    "selectedIngredients": "Bahan yang dipilih:",
+    "searchLabel": "Carian:",
+    "originLabel": "Asal:"
+  },
+  "recipe": {
+    "back": "Kembali ke Senarai",
+    "prepTime": "Minit Persediaan",
+    "cookTime": "Minit Memasak",
+    "servings": "Hidangan",
+    "calories": "Kalori",
+    "ingredients": "Bahan-bahan",
+    "steps": "Langkah-langkah",
+    "history": "Sejarah",
+    "historyOf": "Sejarah {name}",
+    "noIngredients": "Tiada maklumat bahan",
+    "noSteps": "Tiada maklumat langkah memasak",
+    "noHistory": "Tiada maklumat sejarah untuk resipi ini",
+    "tags": "Tags",
+    "errorTitle": "Ralat memuat resipi",
+    "errorDesc": "Gagal memuat resipi. Sila cuba lagi kemudian."
+  },
+  "about": {
+    "title": "Tentang SajianMalaya",
+    "description": "SajianMalaya ialah platform resipi digital yang menyenaraikan pelbagai resipi masakan dari Malaysia.",
+    "technology": "Teknologi",
+    "ctaTitle": "Mulakan Pencarian Resipi Anda",
+    "ctaDesc": "Terokai koleksi resipi kami dan mulakan perjalanan masakan anda hari ini!",
+    "ctaButton": "Lihat Semua Resipi"
+  },
+  "error": {
+    "404Title": "Halaman Tidak Dijumpai",
+    "500Title": "Ralat Pelayan",
+    "defaultTitle": "Ralat Berlaku",
+    "404Desc": "Halaman yang anda cari tidak wujud atau telah dipindahkan.",
+    "500Desc": "Terdapat masalah pada pelayan. Sila cuba lagi kemudian.",
+    "defaultDesc": "Sesuatu yang tidak dijangka telah berlaku. Sila cuba lagi.",
+    "home": "Kembali ke Laman Utama",
+    "back": "Halaman Sebelumnya",
+    "help": "Jika masalah berterusan, sila hubungi sokongan kami."
+  }
+}

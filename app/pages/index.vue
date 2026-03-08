@@ -85,13 +85,13 @@ useSeoMeta({
           <div class="flex-1 order-2 lg:order-1 text-center lg:text-left space-y-6">
             
             <h1 class="text-4xl lg:text-6xl font-extrabold text-balance text-accent-cream">
-              Cari Resipi dengan Mudah!
+              {{ $t('hero.title') }}
             </h1>
-            
+
             <p class="text-xl lg:text-2xl text-balance text-white/90">
-              Anda boleh buat carian dengan nama sajian, bahan yang diperlukan dan juga masa memasak.
+              {{ $t('hero.subtitle') }}
             </p>
-            
+
             <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
               <UButton
                 size="xl"
@@ -99,7 +99,7 @@ useSeoMeta({
                 @click="scrollToRecipes"
                 class="bg-primary-green hover:bg-primary-green/90 text-white"
               >
-                Cari Resipi
+                {{ $t('hero.cta') }}
               </UButton>
               
             </div>
@@ -126,10 +126,10 @@ useSeoMeta({
           <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h2 class="text-3xl lg:text-5xl font-bold text-accent-cream mb-2">
-                Resipi Terbaru
+                {{ $t('recipes.latest') }}
               </h2>
               <p class="text-lg text-white/80">
-                Terokai koleksi resipi terbaik kami
+                {{ $t('recipes.explore') }}
               </p>
             </div>
             
@@ -140,7 +140,7 @@ useSeoMeta({
               size="lg"
               class="bg-primary-green/20 text-accent-cream"
             >
-              {{ recipes.length }} resipi ditemui
+              {{ $t('recipes.found', { count: recipes.length }) }}
             </UBadge>
           </div>
 
@@ -162,8 +162,8 @@ useSeoMeta({
             icon="i-heroicons-exclamation-triangle"
             color="red"
             variant="soft"
-            title="Ralat memuat data"
-            description="Data tidak dapat dipaparkan. Sila cuba lagi kemudian."
+            :title="$t('recipes.errorTitle')"
+            :description="$t('recipes.errorDesc')"
           />
 
           <!-- No Results -->
@@ -171,10 +171,10 @@ useSeoMeta({
             <div class="text-center py-12">
               <UIcon name="i-heroicons-magnifying-glass" class="text-6xl text-primary-green/50 mb-4" />
               <h3 class="text-xl font-semibold text-primary-dark mb-2">
-                Tiada resipi ditemui
+                {{ $t('recipes.noResults') }}
               </h3>
               <p class="text-gray-600">
-                Cuba cari dengan kata kunci yang berbeza
+                {{ $t('recipes.noResultsHint') }}
               </p>
             </div>
           </UCard>

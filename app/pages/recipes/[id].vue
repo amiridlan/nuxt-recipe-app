@@ -4,16 +4,25 @@ import { type Recipe } from '~~/types/types';
 
 const route = useRoute();
 const id = route.params.id as string;
+const { locale, t } = useI18n();
 
 const { fetchRecipeById } = useRecipes();
 
-// Fetch recipe from Supabase
+// Fetch recipe from Supabase, re-fetch automatically when locale changes
 const { data: recipe, error, pending } = await useAsyncData<Recipe>(
   `recipe-${id}`,
-  () => fetchRecipeById(id)
+  () => fetchRecipeById(id, locale.value),
+  { watch: [locale] }
 );
 
 const activeTab = ref(0);
+
+// Stable key-based tabs so label translations don't break matching
+const tabs = computed(() => [
+  { key: 'ingredients', label: t('recipe.ingredients'), icon: 'i-heroicons-shopping-bag' },
+  { key: 'steps',       label: t('recipe.steps'),       icon: 'i-heroicons-list-bullet' },
+  { key: 'history',     label: t('recipe.history'),     icon: 'i-heroicons-book-open' }
+]);
 
 useSeoMeta({
   title: recipe?.value?.name || 'Recipe Details',
@@ -45,8 +54,8 @@ useSeoMeta({
         icon="i-heroicons-exclamation-triangle"
         color="red"
         variant="soft"
-        title="Ralat memuat resipi"
-        description="Gagal memuat resipi. Sila cuba lagi kemudian."
+        :title="$t('recipe.errorTitle')"
+        :description="$t('recipe.errorDesc')"
         class="mb-6"
       />
 
@@ -61,7 +70,7 @@ useSeoMeta({
           size="lg"
           class="text-white hover:text-accent-cream hover:bg-primary-green/20"
         >
-          Kembali ke Senarai
+          {{ $t('recipe.back') }}
         </UButton>
 
         <!-- Recipe Header -->
@@ -121,7 +130,7 @@ useSeoMeta({
               <div class="text-2xl font-bold text-primary-dark">
                 {{ recipe.preparation_time_minutes ?? 'N/A' }}
               </div>
-              <div class="text-sm text-gray-600">Minit Persediaan</div>
+              <div class="text-sm text-gray-600">{{ $t('recipe.prepTime') }}</div>
             </div>
           </UCard>
 
@@ -131,7 +140,7 @@ useSeoMeta({
               <div class="text-2xl font-bold text-primary-dark">
                 {{ recipe.cooking_time_minutes ?? 'N/A' }}
               </div>
-              <div class="text-sm text-gray-600">Minit Memasak</div>
+              <div class="text-sm text-gray-600">{{ $t('recipe.cookTime') }}</div>
             </div>
           </UCard>
 
@@ -141,7 +150,7 @@ useSeoMeta({
               <div class="text-2xl font-bold text-primary-dark">
                 {{ recipe.servings ?? 'N/A' }}
               </div>
-              <div class="text-sm text-gray-600">Hidangan</div>
+              <div class="text-sm text-gray-600">{{ $t('recipe.servings') }}</div>
             </div>
           </UCard>
 
@@ -151,28 +160,23 @@ useSeoMeta({
               <div class="text-2xl font-bold text-primary-dark">
                 {{ recipe.calories_per_serving ?? 'N/A' }}
               </div>
-              <div class="text-sm text-gray-600">Kalori</div>
+              <div class="text-sm text-gray-600">{{ $t('recipe.calories') }}</div>
             </div>
           </UCard>
         </div>
 
-        <!-- Tabs for Ingredients and Instructions -->
-        <UTabs 
-          v-model="activeTab" 
-          :items="[
-            { label: 'Bahan-bahan', icon: 'i-heroicons-shopping-bag' },
-            { label: 'Langkah-langkah', icon: 'i-heroicons-list-bullet' }
-          ]"
-        >
+        <!-- Tabs for Ingredients, Steps and History -->
+        <UTabs v-model="activeTab" :items="tabs">
           <template #item="{ item }">
-            <UCard v-if="item.label === 'Bahan-bahan'" class="bg-white border border-primary-green/20">
+            <!-- Ingredients Tab -->
+            <UCard v-if="item.key === 'ingredients'" class="bg-white border border-primary-green/20">
               <template #header>
-                <h3 class="text-2xl font-bold text-primary-dark">Bahan-bahan</h3>
+                <h3 class="text-2xl font-bold text-primary-dark">{{ $t('recipe.ingredients') }}</h3>
               </template>
-              
+
               <ul class="space-y-3">
-                <li 
-                  v-for="(ingredient, index) in recipe.ingredients || []" 
+                <li
+                  v-for="(ingredient, index) in recipe.ingredients || []"
                   :key="index"
                   class="flex items-start gap-3"
                 >
@@ -180,20 +184,21 @@ useSeoMeta({
                   <span class="text-lg text-gray-700">{{ ingredient }}</span>
                 </li>
               </ul>
-              
+
               <div v-if="!recipe.ingredients || recipe.ingredients.length === 0" class="text-center py-8 text-gray-500">
-                Tiada maklumat bahan
+                {{ $t('recipe.noIngredients') }}
               </div>
             </UCard>
 
-            <UCard v-else class="bg-white border border-primary-green/20">
+            <!-- Steps Tab -->
+            <UCard v-else-if="item.key === 'steps'" class="bg-white border border-primary-green/20">
               <template #header>
-                <h3 class="text-2xl font-bold text-primary-dark">Langkah-langkah</h3>
+                <h3 class="text-2xl font-bold text-primary-dark">{{ $t('recipe.steps') }}</h3>
               </template>
-              
+
               <ol class="space-y-6">
-                <li 
-                  v-for="(step, index) in recipe.steps || []" 
+                <li
+                  v-for="(step, index) in recipe.steps || []"
                   :key="index"
                   class="flex gap-4"
                 >
@@ -203,9 +208,27 @@ useSeoMeta({
                   <p class="text-lg text-gray-700 pt-1">{{ step }}</p>
                 </li>
               </ol>
-              
+
               <div v-if="!recipe.steps || recipe.steps.length === 0" class="text-center py-8 text-gray-500">
-                Tiada maklumat langkah memasak
+                {{ $t('recipe.noSteps') }}
+              </div>
+            </UCard>
+
+            <!-- History Tab -->
+            <UCard v-else class="bg-white border border-primary-green/20">
+              <template #header>
+                <div class="flex items-center gap-3">
+                  <UIcon name="i-heroicons-book-open" class="text-2xl text-primary-green" />
+                  <h3 class="text-2xl font-bold text-primary-dark">{{ $t('recipe.historyOf', { name: recipe.name }) }}</h3>
+                </div>
+              </template>
+
+              <div v-if="recipe.history" class="prose prose-lg max-w-none text-gray-700 leading-relaxed whitespace-pre-line">
+                {{ recipe.history }}
+              </div>
+
+              <div v-else class="text-center py-8 text-gray-500">
+                {{ $t('recipe.noHistory') }}
               </div>
             </UCard>
           </template>
@@ -214,7 +237,7 @@ useSeoMeta({
         <!-- Tags -->
         <UCard v-if="recipe.tags && recipe.tags.length > 0" class="bg-white border border-primary-green/20">
           <template #header>
-            <h3 class="text-xl font-bold text-primary-dark">Tags</h3>
+            <h3 class="text-xl font-bold text-primary-dark">{{ $t('recipe.tags') }}</h3>
           </template>
           
           <div class="flex flex-wrap gap-2">

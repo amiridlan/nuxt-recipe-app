@@ -41,11 +41,11 @@ const totalTime = (recipe: Recipe) => {
       <div class="flex flex-wrap gap-4 text-sm text-gray-700">
         <div class="flex items-center gap-1.5">
           <UIcon name="i-heroicons-clock" class="text-primary-green" />
-          <span>{{ totalTime(recipe) }} minit</span>
+          <span>{{ totalTime(recipe) }} {{ $t('recipes.minutes') }}</span>
         </div>
         <div class="flex items-center gap-1.5">
           <UIcon name="i-heroicons-fire" class="text-accent-cream" />
-          <span>{{ recipe.calories_per_serving ?? 'N/A' }} kalori</span>
+          <span>{{ recipe.calories_per_serving ?? 'N/A' }} {{ $t('recipes.calories') }}</span>
         </div>
       </div>
 
@@ -71,7 +71,7 @@ const totalTime = (recipe: Recipe) => {
         trailing-icon="i-heroicons-arrow-right"
         class="bg-primary-green hover:bg-primary-green/90 text-white"
       >
-        Lihat Resipi
+        {{ $t('recipes.viewRecipe') }}
       </UButton>
     </template>
   </UCard>

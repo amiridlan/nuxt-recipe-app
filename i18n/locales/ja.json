@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "about": "私たちについて"
+  },
+  "footer": {
+    "tagline": "マレーシアと東南アジアのデジタルレシピプラットフォーム。",
+    "links": "リンク"
+  },
+  "hero": {
+    "title": "簡単にレシピを探そう！",
+    "subtitle": "料理名、必要な材料、調理時間で検索できます。",
+    "cta": "レシピを探す"
+  },
+  "recipes": {
+    "latest": "最新レシピ",
+    "explore": "厳選レシピコレクションを探索",
+    "found": "{count}件のレシピが見つかりました",
+    "errorTitle": "データ読み込みエラー",
+    "errorDesc": "データを表示できませんでした。後でもう一度お試しください。",
+    "noResults": "レシピが見つかりません",
+    "noResultsHint": "別のキーワードで検索してみてください",
+    "viewRecipe": "レシピを見る",
+    "minutes": "分",
+    "calories": "カロリー"
+  },
+  "search": {
+    "placeholder": "レシピ名を検索...",
+    "allOrigins": "すべての産地",
+    "selectOrigin": "産地を選択",
+    "addIngredient": "材料を追加（例：鶏肉、玉ねぎ、唐辛子）...",
+    "add": "追加",
+    "reset": "リセット",
+    "selectedIngredients": "選択した材料：",
+    "searchLabel": "検索：",
+    "originLabel": "産地："
+  },
+  "recipe": {
+    "back": "一覧に戻る",
+    "prepTime": "準備時間（分）",
+    "cookTime": "調理時間（分）",
+    "servings": "人前",
+    "calories": "カロリー",
+    "ingredients": "材料",
+    "steps": "手順",
+    "history": "歴史",
+    "historyOf": "{name}の歴史",
+    "noIngredients": "材料情報がありません",
+    "noSteps": "調理手順情報がありません",
+    "noHistory": "このレシピの歴史情報がありません",
+    "tags": "タグ",
+    "errorTitle": "レシピ読み込みエラー",
+    "errorDesc": "レシピの読み込みに失敗しました。後でもう一度お試しください。"
+  },
+  "about": {
+    "title": "SajianMalayaについて",
+    "description": "SajianMalayaは、マレーシアのさまざまなレシピを掲載するデジタルレシピプラットフォームです。",
+    "technology": "技術スタック",
+    "ctaTitle": "レシピ検索を始めよう",
+    "ctaDesc": "レシピコレクションを探索して、今日から料理の旅を始めましょう！",
+    "ctaButton": "すべてのレシピを見る"
+  },
+  "error": {
+    "404Title": "ページが見つかりません",
+    "500Title": "サーバーエラー",
+    "defaultTitle": "エラーが発生しました",
+    "404Desc": "お探しのページは存在しないか、移動されました。",
+    "500Desc": "サーバーに問題があります。後でもう一度お試しください。",
+    "defaultDesc": "予期せぬことが起こりました。もう一度お試しください。",
+    "home": "ホームに戻る",
+    "back": "前のページ",
+    "help": "問題が続く場合は、サポートにお問い合わせください。"
+  }
+}
