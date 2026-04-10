@@ -2,30 +2,70 @@ name: Supabase Keep-Alive Ping
 
 on:
   schedule:
-    # Runs at 00:00 UTC every 4 days
-    - cron: '0 0 */4 * *'
-  workflow_dispatch: # Allows manual triggering from GitHub UI
+    # Runs every 2 days at 08:00 UTC — more margin against GitHub's scheduling delays
+    - cron: '0 8 */2 * *'
+  workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ping Supabase Database
+      - name: Validate secrets are set
         run: |
-          # Query the database via PostgREST to register as actual activity
-          response=$(curl -X GET \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/recipes?limit=1" \
-            -w "\n%{http_code}" -s)
+          if [ -z "${{ secrets.SUPABASE_URL }}" ]; then
+            echo "ERROR: SUPABASE_URL secret is not set in GitHub repo settings"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SUPABASE_ANON_KEY }}" ]; then
+            echo "ERROR: SUPABASE_ANON_KEY secret is not set in GitHub repo settings"
+            exit 1
+          fi
+          echo "Secrets are present"
 
+      - name: Ping Supabase REST API
+        run: |
+          SUPABASE_URL="${{ secrets.SUPABASE_URL }}"
+          ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+
+          # Strip trailing slash from URL if present
+          SUPABASE_URL="${SUPABASE_URL%/}"
+
+          echo "Pinging: ${SUPABASE_URL}/rest/v1/recipes?limit=1"
+
+          response=$(curl -s -w "\n%{http_code}" \
+            -H "apikey: ${ANON_KEY}" \
+            "${SUPABASE_URL}/rest/v1/recipes?limit=1")
+
+          body=$(echo "$response" | head -n -1)
           http_code=$(echo "$response" | tail -n1)
 
-          if [ "$http_code" -eq 200 ]; then
-            echo "✓ Successfully pinged Supabase at $(date)"
+          echo "HTTP Status: ${http_code}"
+          echo "Response body: ${body}"
+
+          if [ "${http_code}" = "200" ]; then
+            echo "✓ Ping successful at $(date -u)"
           else
-            echo "Failed to ping Supabase. HTTP Status: $http_code"
-            echo "Response: $response"
+            echo "✗ Ping failed — HTTP ${http_code}"
             exit 1
+          fi
+
+      - name: Ping Supabase Auth health
+        run: |
+          SUPABASE_URL="${{ secrets.SUPABASE_URL }}"
+          ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+          SUPABASE_URL="${SUPABASE_URL%/}"
+
+          echo "Pinging auth health: ${SUPABASE_URL}/auth/v1/health"
+
+          http_code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: ${ANON_KEY}" \
+            "${SUPABASE_URL}/auth/v1/health")
+
+          echo "Auth health HTTP Status: ${http_code}"
+
+          if [ "${http_code}" = "200" ]; then
+            echo "✓ Auth health check passed"
+          else
+            echo "⚠ Auth health returned ${http_code} (non-fatal)"
           fi
