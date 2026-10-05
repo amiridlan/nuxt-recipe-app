@@ -4,7 +4,7 @@ import { type Recipe } from '~~/types/types';
 
 const { fetchRecipes } = useRecipes();
 
-// Fetch recipes from Supabase
+// Fetch recipes from the recipes API
 const { data, error, pending } = await useAsyncData<Recipe[]>('recipes', () => fetchRecipes());
 
 const searchQuery = ref('');
@@ -62,13 +62,15 @@ const scrollToRecipes = () => {
   recipesSection?.scrollIntoView({ behavior: 'smooth' });
 };
 
+const requestUrl = useRequestURL();
+
 useSeoMeta({
   title: "SajianMalaya",
   description: "Recipes for you to cook!",
   ogTitle: "SajianMalaya",
   ogDescription: "Recipes for you to cook!",
   ogImage: "/nuxt-course-hero.png",
-  ogUrl: `https://nuxtrecipes.netlify.app/`,
+  ogUrl: requestUrl.origin,
   twitterTitle: "SajianMalaya",
   twitterDescription: "Recipes for you to cook!",
   twitterImage: "/nuxt-course-hero.png",

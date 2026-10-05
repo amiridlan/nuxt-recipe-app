@@ -3,7 +3,7 @@ const technologies = [
   { name: 'Nuxt 3', icon: 'i-simple-icons-nuxtdotjs' },
   { name: 'Vue 3', icon: 'i-simple-icons-vuedotjs' },
   { name: 'TypeScript', icon: 'i-simple-icons-typescript' },
-  { name: 'Supabase', icon: 'i-simple-icons-supabase' },
+  { name: 'Cloudflare', icon: 'i-simple-icons-cloudflare' },
   { name: 'NuxtUI', icon: 'i-simple-icons-nuxtdotjs' },
   { name: 'TailwindCSS', icon: 'i-simple-icons-tailwindcss' }
 ];

@@ -21,7 +21,7 @@ export interface Recipe {
     calories_per_serving: number;  // Updated from camelCase
     tags:               string[];
     user_id:            number;  // Updated from camelCase
-    image_url:          string;  // Updated: now comes from Supabase
+    image_url:          string;
     rating:             number;
     review_count:       number;  // Updated from camelCase
     meal_type:          string[];  // Updated from camelCase

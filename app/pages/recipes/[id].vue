@@ -8,7 +8,7 @@ const { locale, t } = useI18n();
 
 const { fetchRecipeById } = useRecipes();
 
-// Fetch recipe from Supabase, re-fetch automatically when locale changes
+// Fetch recipe from the recipes API, re-fetch automatically when locale changes
 const { data: recipe, error, pending } = await useAsyncData<Recipe>(
   `recipe-${id}`,
   () => fetchRecipeById(id, locale.value),
@@ -16,6 +16,7 @@ const { data: recipe, error, pending } = await useAsyncData<Recipe>(
 );
 
 const activeTab = ref(0);
+const requestUrl = useRequestURL();
 
 // Stable key-based tabs so label translations don't break matching
 const tabs = computed(() => [
@@ -24,16 +25,21 @@ const tabs = computed(() => [
   { key: 'history',     label: t('recipe.history'),     icon: 'i-heroicons-book-open' }
 ]);
 
+const ogImage = computed(() => {
+  const image = recipe?.value?.image_url || '/nuxt-course-hero.png';
+  return image.startsWith('http') ? image : `${requestUrl.origin}${image}`;
+});
+
 useSeoMeta({
   title: recipe?.value?.name || 'Recipe Details',
   description: recipe?.value?.description || '',
   ogTitle: recipe?.value?.name || 'Recipe Details',
   ogDescription: recipe?.value?.description || '',
-  ogImage: recipe?.value?.image_url || '/nuxt-course-hero.png',
-  ogUrl: `https://nuxtrecipes.netlify.app/recipes/${id}`,
+  ogImage: ogImage,
+  ogUrl: `${requestUrl.origin}/recipes/${id}`,
   twitterTitle: recipe?.value?.name || 'Recipe Details',
   twitterDescription: recipe?.value?.description || '',
-  twitterImage: recipe?.value?.image_url || '/nuxt-course-hero.png',
+  twitterImage: ogImage,
   twitterCard: "summary",
 });
 </script>

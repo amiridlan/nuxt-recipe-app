@@ -30,13 +30,32 @@ export default defineNuxtConfig({
     }
   },
   devtools: { enabled: true },
-  
+
+  nitro: {
+    preset: 'cloudflare_pages',
+    serverAssets: [
+      { baseName: 'seedImages', dir: './assets/seed-images' }
+    ]
+  },
+
   modules: [
     '@nuxt/ui',
     '@nuxt/image',
     '@nuxtjs/google-fonts',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@nuxthub/core'
   ],
+
+  hub: {
+    db: 'sqlite',
+    // Cloudflare R2 has no local emulation under `nuxt dev`, so fall back to a
+    // filesystem-backed blob store in dev and only use R2 once actually deployed.
+    blob: process.env.NODE_ENV === 'development' ? { driver: 'fs', dir: '.data/blob' } : true
+  },
+
+  runtimeConfig: {
+    seedSecret: process.env.SEED_SECRET || ''
+  },
 
   i18n: {
     defaultLocale: 'en',
@@ -65,14 +84,6 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['https://vghtpyughervgulwbkud.supabase.co'],
     ipx: {}
-  },
-
-  runtimeConfig: {
-    public: {
-      supabaseUrl: process.env.SUPABASE_URL,
-      supabaseKey: process.env.SUPABASE_ANON_KEY,
-    }
   }
 })

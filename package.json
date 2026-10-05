@@ -13,15 +13,18 @@
     "@nuxt/icon": "^1.12.0",
     "@nuxt/image": "^1.10.0",
     "@nuxt/ui": "^2.21.0",
+    "@nuxthub/core": "^0.10.8",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/i18n": "^9.5.6",
-    "@supabase/supabase-js": "^2.89.0",
     "axios": "^1.9.0",
+    "drizzle-orm": "^0.45.3",
     "nuxt": "^3.17.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@iconify-json/simple-icons": "^1.2.63"
+    "@iconify-json/simple-icons": "^1.2.63",
+    "@libsql/client": "^0.18.0",
+    "drizzle-kit": "^0.31.11"
   }
 }
