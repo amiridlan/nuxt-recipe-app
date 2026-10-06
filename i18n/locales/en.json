@@ -22,7 +22,8 @@
     "noResultsHint": "Try searching with different keywords",
     "viewRecipe": "View Recipe",
     "minutes": "min",
-    "calories": "cal"
+    "calories": "cal",
+    "imageNotAvailable": "Image not available"
   },
   "search": {
     "placeholder": "Search recipe name...",

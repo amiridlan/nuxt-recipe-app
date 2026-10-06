@@ -22,7 +22,8 @@
     "noResultsHint": "Cuba cari dengan kata kunci yang berbeza",
     "viewRecipe": "Lihat Resipi",
     "minutes": "minit",
-    "calories": "kalori"
+    "calories": "kalori",
+    "imageNotAvailable": "Imej tidak tersedia"
   },
   "search": {
     "placeholder": "Cari nama resipi...",

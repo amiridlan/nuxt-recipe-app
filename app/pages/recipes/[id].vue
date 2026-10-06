@@ -121,11 +121,20 @@ useSeoMeta({
 
         <!-- Recipe Image -->
         <UCard class="bg-white border border-primary-green/20">
-          <NuxtImg 
-            :src="recipe.image_url" 
-            :alt="recipe.name" 
-            class="rounded-lg w-full h-auto max-h-[600px] object-cover" 
+          <NuxtImg
+            v-if="recipe.image_url"
+            :src="recipe.image_url"
+            provider="none"
+            :alt="recipe.name"
+            class="rounded-lg w-full h-auto max-h-[600px] object-cover"
           />
+          <div
+            v-else
+            class="rounded-lg w-full h-64 flex flex-col items-center justify-center gap-2 bg-primary-dark/5 text-primary-dark/40"
+          >
+            <UIcon name="i-heroicons-photo" class="text-4xl" />
+            <span class="text-sm font-medium">{{ $t('recipes.imageNotAvailable') }}</span>
+          </div>
         </UCard>
 
         <!-- Recipe Info Grid -->

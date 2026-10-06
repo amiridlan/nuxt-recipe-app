@@ -22,7 +22,8 @@
     "noResultsHint": "別のキーワードで検索してみてください",
     "viewRecipe": "レシピを見る",
     "minutes": "分",
-    "calories": "カロリー"
+    "calories": "カロリー",
+    "imageNotAvailable": "画像がありません"
   },
   "search": {
     "placeholder": "レシピ名を検索...",

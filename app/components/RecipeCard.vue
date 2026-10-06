@@ -13,15 +13,21 @@ const totalTime = (recipe: Recipe) => {
 <template>
   <UCard class="hover:scale-[1.02] transition-transform duration-300 flex flex-col h-full bg-white border border-primary-green/20">
     <template #header>
-      <div class="relative overflow-hidden rounded-lg h-64">
-        <NuxtImg 
-          :src="recipe.image_url" 
-          sizes="xs:100vw sm:50vw lg:400px" 
-          format="jpg" 
-          densities="x1" 
-          :alt="recipe.name || 'Recipe Image'" 
-          class="w-full h-full object-cover" 
+      <div class="relative overflow-hidden rounded-lg h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96">
+        <NuxtImg
+          v-if="recipe.image_url"
+          :src="recipe.image_url"
+          provider="none"
+          :alt="recipe.name || 'Recipe Image'"
+          class="w-full h-full object-cover"
         />
+        <div
+          v-else
+          class="w-full h-full flex flex-col items-center justify-center gap-2 bg-primary-dark/5 text-primary-dark/40"
+        >
+          <UIcon name="i-heroicons-photo" class="text-4xl" />
+          <span class="text-sm font-medium">{{ $t('recipes.imageNotAvailable') }}</span>
+        </div>
         <UBadge
           v-if="recipe.difficulty"
           :color="recipe.difficulty === 'Easy' ? 'green' : recipe.difficulty === 'Medium' ? 'yellow' : 'red'"
