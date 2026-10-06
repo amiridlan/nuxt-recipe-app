@@ -1,0 +1,24 @@
+{
+  "name": "nuxt-recipe-app",
+  "main": ".output/server/index.mjs",
+  "compatibility_date": "2025-05-09",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".output/public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sajianmalaya",
+      "database_id": "f27feb9e-f298-4835-9b52-c228105018c4",
+      "migrations_dir": "server/db/migrations/sqlite"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BLOB",
+      "bucket_name": "sajianmalaya"
+    }
+  ]
+}
